@@ -11,6 +11,10 @@ import os
 from django.core.wsgi import get_wsgi_application
 from discord_interaction.app import create_app_instance
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'discord_interaction.settings')
+app = create_app_instance()
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'discord_interaction')
 
 application = get_wsgi_application()
+
+if __name__ == 'discord_interaction':
+    app.run()

@@ -1,2 +1,2 @@
-web: gunicorn discord_interaction.settings wsgi:app
+web: gunicorn discord_interaction 
 
