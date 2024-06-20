@@ -9,9 +9,8 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
 
 import os
 from django.core.wsgi import get_wsgi_application
-from nltk import app
+from discord_interaction.app import create_app_instance
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'discord_interaction.settings')
 
 application = get_wsgi_application()
-app.run()
