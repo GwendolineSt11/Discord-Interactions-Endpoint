@@ -95,10 +95,8 @@ CSRF_COOKIE_HTTPONLY = False
 
 # Default to using SQLite for local development
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=os.environ.get('postgres://uc67brmbo0sn72:p9c159a42672183ecd8164c5a9ce7a9a922eb2eb17545918266793790c53ae4c0@cd1goc44htrmfn.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d73q7i4q0ge7vo')),
+
 }
 
 # If DATABASE_URL is set in the environment, use that instead
