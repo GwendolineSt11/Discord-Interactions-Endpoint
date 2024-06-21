@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', lambda request: HttpResponse("Test URL works!")),
     path('interaction/', include('interactions.urls')),
+    path('', include('interactions.urls')),
 ]
