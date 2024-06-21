@@ -17,11 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
-from sqlalchemy.dialects.mssql.information_schema import views
+import sqlalchemy.dialects.mssql.information_schema
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', lambda request: HttpResponse("Test URL works!")),
-    path('interactions/', views.interactions_view, name='interactions'),
+    path('interactions/', sqlalchemy.dialects.mssql.information_schema.views.interactions_view, name='interactions'),
     path('', include('interactions.urls')),
 ]
