@@ -1,4 +1,10 @@
 from sanic import Sanic
+
+
+def __init_():
+    return None
+
+
 def create_app_instance():
-    app = Sanic(name="discord_interaction")
-    return app
+    application = Sanic(name="discord_interaction")
+    return application
