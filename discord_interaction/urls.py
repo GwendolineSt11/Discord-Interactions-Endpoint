@@ -14,14 +14,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from . import views
 from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
-import sqlalchemy.dialects.mssql.information_schema
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', lambda request: HttpResponse("Test URL works!")),
-    path('interactions/', sqlalchemy.dialects.mssql.information_schema.views.interactions_view, name='interactions'),
+    path('interactions/', views.interactions_view, name='interactions'),
     path('', include('interactions.urls')),
 ]
