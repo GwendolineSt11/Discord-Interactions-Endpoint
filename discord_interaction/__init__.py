@@ -6,5 +6,5 @@ def __init_():
 
 
 def create_app_instance():
-    application = Sanic(name="discord_interaction")
+    application = Sanic(name="discord_interaction.settings")
     return application

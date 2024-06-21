@@ -12,7 +12,7 @@ from django.core.wsgi import get_wsgi_application
 from discord_interaction.__init__ import create_app_instance
 
 application = create_app_instance()
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'discord_interaction')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'discord_interaction.settings')
 
 application = get_wsgi_application()
 if __name__ == 'discord_interaction':
