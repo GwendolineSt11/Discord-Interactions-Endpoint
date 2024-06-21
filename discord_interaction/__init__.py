@@ -1,7 +1,7 @@
 from sanic import Sanic
 
 
-def __init_():
+def __init__():
     return None
 
 
