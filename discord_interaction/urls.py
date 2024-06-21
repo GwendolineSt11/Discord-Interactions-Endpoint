@@ -17,13 +17,14 @@ Including another URLconf
 from . import views
 from django.contrib import admin
 from django.urls import path, include
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.http import HttpResponse
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', lambda request: HttpResponse("Test URL works!")),
-    path('interactions/', views.interactions_view, name='interactions'),
+    path('interactions/', views.interactions_view, include('interactions.urls')),
     path('', include('interactions.urls')),
+
 ]
