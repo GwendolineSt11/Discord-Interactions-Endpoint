@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'corsheaders',
     'interactions',
+    'discord_interaction',
     
 ]
 
