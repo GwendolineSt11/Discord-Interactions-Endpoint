@@ -68,7 +68,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://c45a-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app',
 ]
 
-ROOT_URLCONF = 'discord_interaction.urls'
+ROOT_URLCONF = 'interactions.urls'
 
 TEMPLATES = [
     {
