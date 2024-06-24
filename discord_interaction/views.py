@@ -12,6 +12,9 @@ def interactions_view(request):
             if data.get('type') == 1:
                 response_data = {
                     "type": 1,
+                    "data": {
+                        "token": "MTI0OTE4Njc1MjA0NDk5MDUyNQ.GqmUvq.lmobEvfybJrUSgtsDmgl6d-H2G67fFQWR3youI"
+                    },
                     "token": data.get("token"),
                 }
                 return JsonResponse(response_data)
