@@ -19,9 +19,9 @@ def interactions_view(request):
             logger.info(f"Received data: {data}")
             received_token = data.get("token")
             logger.info(f"Received token: {received_token}")
-            if data.get('PING') == 1:
+            if data.get('type') == 1:
                 response_data = {
-                    "PONG": 1,
+                    "type": 1,
                     "token": data.get("token"),
                 }
                 return JsonResponse(response_data, received_token)
