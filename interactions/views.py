@@ -18,17 +18,12 @@ def interaction_endpoint(request):
             data = json.loads(raw_body)
             logger.info(f"Received data: {data}")
             data = json.loads(request.body)
-            if data.get('type') == 1:
-                logger.info("Received Discord PING")
-                return JsonResponse({"type": 1})
-
-            response_data = {
-                "type": 4,
-                "data": {
-                    "content": "Pong!"
+            if payload.get('type') == 1:
+                response_payload = {
+                    "type": 1,
+                    "token": payload.get("token"),
                 }
-            }
-            return JsonResponse(response_data)
+            return JsonResponse(response_payload)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         except Exception as e:

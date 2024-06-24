@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3$a6x$k02b6077fk@-8t!-x1q+ifcd(s&cd8jz(y3)j=c0=q!^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io', 'discordapp.com', '53c6-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', '4ffc-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'favicon.ico', '6750-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', '93db-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'https://500b-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'https://c45a-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'ngrok-free.app', 'c45a-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'good-man-close.ngrok-free.app', 'discord-interaction-ba1ec86e5d8e.herokuapp.com', 'gwenactivites.online']
 
