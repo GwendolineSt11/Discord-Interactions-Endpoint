@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.contrib import admin
 from . import views
 
 urlpatterns = [
