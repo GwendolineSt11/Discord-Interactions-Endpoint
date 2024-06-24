@@ -1,5 +1,4 @@
 from venv import logger
-from aiohttp import payload
 from django.http import JsonResponse, HttpResponse
 import json
 
@@ -11,10 +10,10 @@ def interactions_view(request):
             data = json.loads(raw_body)
             logger.info(f"Received data: {data}")
             data = json.loads(request.body)
-            if payload.get('type') == 1:
+            if data.get('type') == 1:
                 response_payload = {
                     "type": 1,
-                    "token": payload.get("token"),
+                    "token": data.get("token"),
                 }
                 return JsonResponse(response_payload)
         except json.JSONDecodeError:
