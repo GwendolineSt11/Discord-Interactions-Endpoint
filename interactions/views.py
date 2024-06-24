@@ -17,12 +17,14 @@ def interactions_view(request):
             logger.info(f"Received raw body: {raw_body}")
             data = json.loads(raw_body)
             logger.info(f"Received data: {data}")
+            received_token = data.get("token")
+            logger.info(f"Received token: {received_token}")
             if data.get('PING') == 1:
-                response_payload = {
+                response_data = {
                     "PONG": 1,
                     "token": data.get("token"),
                 }
-                return JsonResponse(response_payload)
+                return JsonResponse(response_data, received_token)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         except Exception as e:
