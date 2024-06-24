@@ -3,5 +3,8 @@ from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from . import views
 
 urlpatterns = [
-    path('', views.interaction_endpoint, name='interaction_endpoint'),
+    path('admin/', admin.site.urls),
+    path('test/', lambda request: HttpResponse("Test URL works!")),
+    path('interactions/', include('interactions.urls')),
+    path('', views.interactions_view, name='interactions'),
 ]
