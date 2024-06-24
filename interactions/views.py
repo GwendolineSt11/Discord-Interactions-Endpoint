@@ -10,7 +10,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 @csrf_exempt
-def interaction_endpoint(request):
+def interactions_view(request):
     if request.method == 'POST':
         try:
             raw_body = request.body.decode('utf-8')  # Decode byte string to UTF-8
