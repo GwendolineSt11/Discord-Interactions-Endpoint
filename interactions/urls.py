@@ -4,8 +4,7 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, lambda request: HttpResponse("Hi, welcome to Gwen's interactions endpoint server!", "\n", "Cookies?")),
     path('test/', lambda request: HttpResponse("Test URL works!")),
-    path('interactions/', include('interactions.urls')),
-    path('', lambda request: HttpResponse("Hi, welcome to Gwen's interactions endpoint server! \n Cookies?"))
+    path('interactions/', include('discord_interaction.urls')),
 ]
