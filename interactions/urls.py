@@ -6,5 +6,5 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', lambda request: HttpResponse("Test URL works!")),
-    path('interactions/', include('discord_interaction.urls')),
+    path('interactions/', views.interactions_view, name='interactions'),
 ]
