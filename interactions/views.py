@@ -23,7 +23,7 @@ def interaction_endpoint(request):
                     "type": 1,
                     "token": payload.get("token"),
                 }
-            return JsonResponse(response_payload)
+                return JsonResponse(response_payload)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         except Exception as e:
