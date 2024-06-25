@@ -24,7 +24,7 @@ def interactions_view(request):
                     "type": 1,
                     "token": data.get("token"),
                 }
-                return JsonResponse(response_data)
+            return JsonResponse(response_data)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         except Exception as e:
@@ -37,3 +37,4 @@ def interactions_view(request):
             logger.warning("Invalid request method received")
             return JsonResponse({'error': 'Invalid request method'}, status=405)
 
+CLIENT_PUBLIC_KEY= {'68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a'}

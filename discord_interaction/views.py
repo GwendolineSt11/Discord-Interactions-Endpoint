@@ -14,7 +14,7 @@ def interactions_view(request):
                     "type": 1,
                     "token": data.get("token"),
                 }
-                return JsonResponse(response_data)
+            return JsonResponse(response_data)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         except Exception as e:
@@ -24,3 +24,4 @@ def interactions_view(request):
         if request.method == 'GET':
             return HttpResponse("Hello, this is the interaction endpoint! You made it!")
     return HttpResponse("Interactions endpoint works!")
+
