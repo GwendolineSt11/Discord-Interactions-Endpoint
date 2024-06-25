@@ -16,10 +16,8 @@ import os
 import dj_database_url
 import django_heroku
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -30,8 +28,16 @@ SECRET_KEY = 'django-insecure-3$a6x$k02b6077fk@-8t!-x1q+ifcd(s&cd8jz(y3)j=c0=q!^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io', 'discordapp.com', '53c6-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', '4ffc-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'favicon.ico', '6750-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', '93db-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'https://500b-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'https://c45a-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'ngrok-free.app', 'c45a-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'good-man-close.ngrok-free.app', 'discord-interaction-ba1ec86e5d8e.herokuapp.com', 'gwenactivites.online']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '443', '80', '.ngrok.io', 'discordapp.com', 'discord.com',
+                 '53c6-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app',
+                 '4ffc-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'favicon.ico',
+                 '6750-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app',
+                 '93db-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app',
+                 'https://500b-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app',
+                 'https://c45a-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'ngrok-free.app',
+                 'c45a-2806-2f0-4400-4008-b182-bf0b-ef79-aec3.ngrok-free.app', 'good-man-close.ngrok-free.app',
+                 'discord-interaction-ba1ec86e5d8e.herokuapp.com', 'gwenactivites.online']
+PORT = 443
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,7 +52,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'interactions',
     'discord_interaction',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -98,7 +104,8 @@ CSRF_COOKIE_HTTPONLY = False
 
 # Default to using SQLite for local development
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('postgres://uc67brmbo0sn72:p9c159a42672183ecd8164c5a9ce7a9a922eb2eb17545918266793790c53ae4c0@cd1goc44htrmfn.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d73q7i4q0ge7vo')),
+    'default': dj_database_url.config(default=os.environ.get(
+        'postgres://uc67brmbo0sn72:p9c159a42672183ecd8164c5a9ce7a9a922eb2eb17545918266793790c53ae4c0@cd1goc44htrmfn.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d73q7i4q0ge7vo')),
 
 }
 
@@ -124,7 +131,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -135,7 +141,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
