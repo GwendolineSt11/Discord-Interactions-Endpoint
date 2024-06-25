@@ -14,4 +14,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'discord_interaction.settings')
 application = get_wsgi_application()
 
 if __name__ == 'discord_interaction':
+    from django.core.management import execute_from_command_line
+    execute_from_command_line(["manage.py", "runserver", "443"])
     application.run()
