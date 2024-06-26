@@ -23,8 +23,8 @@ def interactions_view(request):
             signature = request.headers.get('X-Signature-Ed25519')
             timestamp = request.headers.get('X-Signature-Timestamp')
             try:
-                signature_bytes = bytes(signature, 'utf-8')
-                timestamp_bytes = bytes(timestamp, 'utf-8')
+                signature_bytes = signature.encode('utf-8')
+                timestamp_bytes = timestamp.encode('utf-8')
             except json.JSONDecodeError:
                 return JsonResponse({"error": "Invalid signature"})
 
