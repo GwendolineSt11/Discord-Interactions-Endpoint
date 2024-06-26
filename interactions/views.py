@@ -10,6 +10,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 @csrf_exempt
 def interactions_view(request):
     if request.method == 'POST':
@@ -25,7 +26,7 @@ def interactions_view(request):
             signature_bytes = signature.encode('utf-8')
             timestamp_bytes = timestamp.encode('utf-8')
 
-            discord_interactions.verify_key(raw_body, signature_bytes, timestamp_bytes, b'68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
+            discord_interactions.verify_key(raw_body, signature_bytes, timestamp_bytes, '68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
 
             if data['type'] == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
