@@ -4,7 +4,7 @@ from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
 from urllib.request import urlopen
 from discord_interaction import urls
-from discord_interactions import verify_key, InteractionType, InteractionResponseType
+import discord_interactions
 import json
 import logging
 
@@ -22,11 +22,11 @@ def interactions_view(request):
             logger.info(f"Received token: {received_token}")
             signature = request.headers.get('X-Signature-Ed25519')
             timestamp = request.headers.get('X-Signature-Timestamp')
-            verify_key(body, signature, timestamp, public_key='68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
+            discord_interactions.verify_key(body, signature, timestamp, public_key='68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
 
             data = json.loads(body)
-            if data['type'] == InteractionType.PING:
-                return JsonResponse({'type': InteractionResponseType.PONG})
+            if data['type'] == discord_interactions.InteractionType.PING:
+                return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
             if data.get('type') == 1:
                 response_data = {
                     "type": 1,
