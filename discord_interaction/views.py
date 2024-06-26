@@ -1,7 +1,7 @@
 from venv import logger
 from django.http import JsonResponse, HttpResponse
 import json
-import discord_interactions
+
 
 def interactions_view(request):
     if request.method == 'POST':

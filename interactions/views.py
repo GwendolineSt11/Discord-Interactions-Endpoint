@@ -7,6 +7,7 @@ from discord_interaction import urls
 import discord_interactions
 import json
 import logging
+import encodings
 
 logger = logging.getLogger(__name__)
 
@@ -21,12 +22,14 @@ def interactions_view(request):
             logger.info(f"Received data: {data}")
             received_token = data.get("token")
             logger.info(f"Received token: {received_token}")
+            public_key = '68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a'
             signature = request.headers.get('X-Signature-Ed25519')
             timestamp = request.headers.get('X-Signature-Timestamp')
             signature_bytes = signature.encode('utf-8')
             timestamp_bytes = timestamp.encode('utf-8')
+            public_key_bytes = public_key.encode('utf-8')
 
-            discord_interactions.verify_key(raw_body, signature_bytes, timestamp_bytes, '68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
+            discord_interactions.verify_key(raw_body, signature_bytes, timestamp_bytes, public_key_bytes)
 
             if data['type'] == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
@@ -44,6 +47,13 @@ def interactions_view(request):
     else:
         if request.method == 'GET':
             return HttpResponse("Hello, this is the interaction endpoint! You made it!")
+        if request.method == 'OPTIONS':
+            self.send_response(200)
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+            self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+            self.end_headers()
         else:
             logger.warning("Invalid request method received")
             return JsonResponse({'error': 'Invalid request method'}, status=405)
+
