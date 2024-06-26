@@ -4,6 +4,7 @@ from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
 from urllib.request import urlopen
 from discord_interaction import urls
+from discord_interactions import verify_key, InteractionType, InteractionResponseType
 import json
 import logging
 
@@ -19,12 +20,19 @@ def interactions_view(request):
             logger.info(f"Received data: {data}")
             received_token = data.get("token")
             logger.info(f"Received token: {received_token}")
+            signature = request.headers.get('X-Signature-Ed25519')
+            timestamp = request.headers.get('X-Signature-Timestamp')
+            verify_key(body, signature, timestamp, public_key='68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
+
+            data = json.loads(body)
+            if data['type'] == InteractionType.PING:
+                return JsonResponse({'type': InteractionResponseType.PONG})
             if data.get('type') == 1:
                 response_data = {
                     "type": 1,
                     "token": data.get("token"),
                 }
-            return JsonResponse(response_data)
+                return JsonResponse(response_data)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         except Exception as e:
@@ -36,5 +44,3 @@ def interactions_view(request):
         else:
             logger.warning("Invalid request method received")
             return JsonResponse({'error': 'Invalid request method'}, status=405)
-
-CLIENT_PUBLIC_KEY= {'68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a'}

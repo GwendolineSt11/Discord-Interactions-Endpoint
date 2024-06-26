@@ -9,12 +9,13 @@ def interactions_view(request):
             logger.info(f"Received raw body: {raw_body}")
             data = json.loads(raw_body)
             logger.info(f"Received data: {data}")
+
             if data.get('type') == 1:
                 response_data = {
                     "type": 1,
                     "token": data.get("token"),
                 }
-            return JsonResponse(response_data)
+                return JsonResponse(response_data)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         except Exception as e:
@@ -24,4 +25,3 @@ def interactions_view(request):
         if request.method == 'GET':
             return HttpResponse("Hello, this is the interaction endpoint! You made it!")
     return HttpResponse("Interactions endpoint works!")
-
