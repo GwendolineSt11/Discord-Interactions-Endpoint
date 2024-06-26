@@ -34,7 +34,7 @@ def interactions_view(request):
                 }
                 return JsonResponse(response_data)
         except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+            return JsonResponse({'error': 'Invalid JSON request'}, status=400)
         except Exception as e:
             logger.error(f"Internal Server Error: {e}")
             return JsonResponse({'error': 'Internal Server Error'}, status=500)
