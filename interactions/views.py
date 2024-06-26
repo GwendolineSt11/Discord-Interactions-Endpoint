@@ -4,7 +4,7 @@ from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
 from urllib.request import urlopen
 from discord_interaction import urls
-import discord_interactions
+from discord_interactions import verify_key
 import json
 import logging
 import encodings
@@ -24,15 +24,18 @@ def interactions_view(request):
             public_key = '68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a'
             signature = request.headers.get('X-Signature-Ed25519')
             timestamp = request.headers.get('X-Signature-Timestamp')
-
-            discord_interactions.verify_key(raw_body, signature, timestamp, public_key)
+            body = request.data.decode("utf-8")
+            try:
+                verify_key.verify(raw_body, f'{timestamp}{body}'.encode(), bytes.fromhex(signature), public_key)
+            except BadSignatureError:
+                abort(401, 'invalid request signature')
 
             if data['type'] == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
             if data.get('type') == 1:
                 response_data = {
                     "type": 1,
-                    "token": data.get("token"),
+                    "data": data.get("token"),
                 }
                 return JsonResponse(response_data)
         except json.JSONDecodeError:
