@@ -30,7 +30,7 @@ def interactions_view(request):
             except BadSignatureError:
                 abort(401, 'invalid request signature')
 
-            if data['type'] == discord_interactions.InteractionType.PING:
+            if data.get('type') == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
             if data.get('type') == 1:
                 response_data = {
