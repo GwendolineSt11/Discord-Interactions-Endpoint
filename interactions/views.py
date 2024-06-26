@@ -35,7 +35,7 @@ def interactions_view(request):
             if data.get('type') == 1:
                 response_data = {
                     "type": 1,
-                    "data": data.get("token"),
+                    "token": data.get("token"),
                 }
                 return JsonResponse(response_data)
         except json.JSONDecodeError:
