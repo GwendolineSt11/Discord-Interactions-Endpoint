@@ -11,7 +11,6 @@ import encodings
 
 logger = logging.getLogger(__name__)
 
-
 @csrf_exempt
 def interactions_view(request):
     if request.method == 'POST':
@@ -25,11 +24,10 @@ def interactions_view(request):
             public_key = '68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a'
             signature = request.headers.get('X-Signature-Ed25519')
             timestamp = request.headers.get('X-Signature-Timestamp')
-            signature_bytes = signature.encode('utf-8')
-            timestamp_bytes = timestamp.encode('utf-8')
+
             public_key_bytes = public_key.encode('utf-8')
 
-            discord_interactions.verify_key(raw_body, signature_bytes, timestamp_bytes, public_key_bytes)
+            discord_interactions.verify_key(raw_body, signature, timestamp, public_key_bytes)
 
             if data['type'] == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
