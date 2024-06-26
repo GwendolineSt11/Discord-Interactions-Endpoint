@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 def interactions_view(request):
     if request.method == 'POST':
         try:
-            raw_body = request.body.decode('utf-8')  # Decode byte string to UTF-8
+            raw_body = request.body
             logger.info(f"Received raw body: {raw_body}")
             data = json.loads(raw_body)
             logger.info(f"Received data: {data}")
