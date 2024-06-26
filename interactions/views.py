@@ -24,7 +24,6 @@ def interactions_view(request):
             timestamp = request.headers.get('X-Signature-Timestamp')
             discord_interactions.verify_key(body, signature, timestamp, public_key='68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
 
-            data = json.loads(body)
             if data['type'] == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
             if data.get('type') == 1:
