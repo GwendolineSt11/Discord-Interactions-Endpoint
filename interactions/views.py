@@ -3,8 +3,8 @@ from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, HttpRe
 from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
 from urllib.request import urlopen
-from discord_interaction import urls
 from discord_interactions import verify_key, verify_key_decorator
+from discord_interaction import urls
 import json
 import logging
 import encodings
@@ -17,14 +17,18 @@ def interactions_view(request):
     if request.method == 'POST':
         try:
             raw_body = request.body
-            logger.info(f"Received raw body: {raw_body}")
-            data = json.loads(raw_body)
-            logger.info(f"Received data: {data}")
             received_token = data.get("token")
             logger.info(f"Received token: {received_token}")
             signature = request.headers.get('X-Signature-Ed25519')
             timestamp = request.headers.get('X-Signature-Timestamp')
-            verify_key(raw_body, f'{signature}', f'{timestamp}', '68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
+            if not signature or not timestamp:
+                return JsonResponse({'Error': 'Missing signature or timestamp'}, status=400)
+
+            try:
+                verify_key(raw_body, f'{signature}', f'{timestamp}', '68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
+            except Exception as e:
+                logger.error(f"Signature verification failed: {e}")
+                return JsonResponse({'Error': 'Signature verification failed'}, status=401)
 
             if data.get('type') == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
