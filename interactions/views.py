@@ -27,8 +27,8 @@ def interactions_view(request):
             body = request.body.decode("utf-8")
             try:
                 verify_key.verify(raw_body, f'{timestamp}{body}'.encode(), bytes.fromhex(signature), public_key)
-            except BadSignatureError:
-                abort(401, 'invalid request signature')
+            except BadSignature:
+                abort(401, 'Invalid request signature')
 
             if data.get('type') == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
