@@ -27,9 +27,8 @@ def interactions_view(request):
             body = request.body.decode("utf-8")
             try:
                 verify_key.verify(raw_body, f'{timestamp}{body}'.encode(), bytes.fromhex(signature), public_key)
-            except BadSignature:
-                abort(401, 'Invalid request signature')
-
+            except SignatureExpired:
+                return JsonResponse({"Error": "Signature invalid or expired"}, status=400)
             if data.get('type') == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
             if data.get('type') == 1:
