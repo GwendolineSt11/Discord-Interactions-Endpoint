@@ -24,7 +24,7 @@ def interactions_view(request):
             public_key = '68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a'
             signature = request.headers.get('X-Signature-Ed25519')
             timestamp = request.headers.get('X-Signature-Timestamp')
-            body = request.data.decode("utf-8")
+            body = request.body.decode("utf-8")
             try:
                 verify_key.verify(raw_body, f'{timestamp}{body}'.encode(), bytes.fromhex(signature), public_key)
             except BadSignatureError:
