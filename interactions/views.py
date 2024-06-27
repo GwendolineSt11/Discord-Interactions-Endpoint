@@ -1,3 +1,4 @@
+import discord_interactions
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, HttpRequest
 from django.urls import path, include
@@ -8,6 +9,7 @@ from discord_interaction import urls
 import json
 import logging
 import encodings
+import interactions
 
 logger = logging.getLogger(__name__)
 
@@ -31,8 +33,8 @@ def interactions_view(request):
                 logger.error(f"Signature verification failed: {e}")
                 return JsonResponse({'Error': 'Signature verification failed'}, status=401)
 
-            if data.get('type') == discord_interactions.InteractionType.PING:
-                return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
+            if data.get('type') == discord_interactions.InteractionType == PING:
+                return JsonResponse({'type': discord_interactions.InteractionResponseType == PONG})
             if data.get('type') == 1:
                 response_data = {
                     "type": 1,
