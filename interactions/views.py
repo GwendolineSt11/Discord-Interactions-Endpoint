@@ -17,6 +17,7 @@ def interactions_view(request):
     if request.method == 'POST':
         try:
             raw_body = request.body
+            data = json.loads(raw_body)
             received_token = data.get("token")
             logger.info(f"Received token: {received_token}")
             signature = request.headers.get('X-Signature-Ed25519')
