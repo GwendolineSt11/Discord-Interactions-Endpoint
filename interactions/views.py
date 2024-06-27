@@ -11,6 +11,7 @@ import encodings
 
 logger = logging.getLogger(__name__)
 
+
 @csrf_exempt
 def interactions_view(request):
     if request.method == 'POST':
@@ -27,8 +28,9 @@ def interactions_view(request):
             body = request.body.decode("utf-8")
             try:
                 verify_key.verify(raw_body, f'{timestamp}{body}'.encode(), bytes.fromhex(signature), public_key)
-            except SignatureExpired:
-                return JsonResponse({"Error": "Signature invalid or expired"}, status=400)
+            except SignatureError:
+                JsonResponse({'Error': 'Signature verification failed'}, status=400)
+
             if data.get('type') == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
             if data.get('type') == 1:
@@ -54,4 +56,3 @@ def interactions_view(request):
         else:
             logger.warning("Invalid request method received")
             return JsonResponse({'error': 'Invalid request method'}, status=405)
-
