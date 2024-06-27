@@ -24,8 +24,7 @@ def interactions_view(request):
             logger.info(f"Received token: {received_token}")
             signature = request.headers.get('X-Signature-Ed25519')
             timestamp = request.headers.get('X-Signature-Timestamp')
-            body = request.body.encode("utf-8")
-            verify_key(raw_body,  f'{signature}{body}', f'{timestamp}{body}', '68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
+            verify_key(raw_body, f'{signature}{raw_body}', f'{timestamp}{raw_body}', '68a897f3fcc0821311abfc807a9dea42b303525d2cfe444d499d39af8d41d36a')
 
             if data.get('type') == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
