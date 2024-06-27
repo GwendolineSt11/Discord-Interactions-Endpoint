@@ -26,10 +26,7 @@ def interactions_view(request):
             signature = request.headers.get('X-Signature-Ed25519')
             timestamp = request.headers.get('X-Signature-Timestamp')
             body = request.body.decode("utf-8")
-            try:
-                verify_key.verify(raw_body, f'{timestamp}{body}'.encode(), bytes.fromhex(signature), public_key)
-            except SignatureError:
-                JsonResponse({'Error': 'Signature verification failed'}, status=400)
+            verify_key.verify(raw_body, f'{timestamp}{body}'.encode(), bytes.fromhex(signature), public_key)
 
             if data.get('type') == discord_interactions.InteractionType.PING:
                 return JsonResponse({'type': discord_interactions.InteractionResponseType.PONG})
